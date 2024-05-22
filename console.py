@@ -10,6 +10,8 @@ from models.state import State
 from models.city import City
 from models.amenity import Amenity
 from models.review import Review
+from datetime import datetime
+
 
 
 class HBNBCommand(cmd.Cmd):
@@ -117,7 +119,8 @@ class HBNBCommand(cmd.Cmd):
         """ Create an object of any class"""
         params = args.split()
         class_name = params[0]
-
+        new_dict = {}
+        
         if not args:
             print("** class name missing **")
             return
@@ -126,24 +129,22 @@ class HBNBCommand(cmd.Cmd):
             return
         else:
             for i in range(1, len(params)):
-                pairs = params[i].split("=") # name, "Texas"
-                # print(type(pairs[1]))
-
+                pairs = params[i].split("=") # name, "Texas" 
                 if pairs[1].isdigit():
-                    print(f"{pairs[1]}")
+                    new_dict[pairs[0]] = pairs[1]
                 elif pairs[1].replace(".", "").isdigit():
-                    print(pairs[1])
-                elif pairs[1].replace("\"", ""):
+                    new_dict[pairs[0]] = pairs[1]
+                elif pairs[1].startswith('"') and pairs[1].endswith('"'):
+                    value= pairs[1].replace("_", " ")
+                    pairs[1] = '"' + value[1:-1].replace('"', '\\"') + '"'
+                    new_dict[pairs[0]] = pairs[1]
+                else:              
                     pass
-                    
-                    # print(pairs[1].replace("\"", ""))
-
-        # create State name="California" number_bathrooms=2 latitude=37.773972
-
-        # new_instance = HBNBCommand.classes[args]()
-        # storage.save()
-        # print(new_instance.id)
-        # storage.save()
+        new_instance = HBNBCommand.classes[class_name]() # b1 =BaseModel()
+        for key, value in new_dict.items():
+            setattr(new_instance, key, value) # b1.name = "yassin"
+        storage.save()
+        print(new_instance.id)
 
     def help_create(self):
         """ Help information for the create method """
