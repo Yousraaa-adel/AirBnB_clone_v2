@@ -134,9 +134,8 @@ class HBNBCommand(cmd.Cmd):
                     new_dict[pairs[0]] = pairs[1]
                 elif pairs[1].replace(".", "").isdigit():
                     new_dict[pairs[0]] = pairs[1]
-                elif pairs[1].startswith('"') and pairs[1].endswith('"'):
-                    value= pairs[1].replace("_", " ")
-                    pairs[1] = '"' + value[1:-1].replace('"', '\\"') + '"'
+                elif type(pairs[1]) is str:
+                    pairs[1].replace("_", " ").replace('"', '\\"')
                     new_dict[pairs[0]] = pairs[1]
                 else:              
                     pass
