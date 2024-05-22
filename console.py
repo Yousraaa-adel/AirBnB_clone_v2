@@ -115,16 +115,35 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, args):
         """ Create an object of any class"""
+        params = args.split()
+        class_name = params[0]
+
         if not args:
             print("** class name missing **")
             return
-        elif args not in HBNBCommand.classes:
+        elif class_name not in HBNBCommand.classes:
             print("** class doesn't exist **")
             return
-        new_instance = HBNBCommand.classes[args]()
-        storage.save()
-        print(new_instance.id)
-        storage.save()
+        else:
+            for i in range(1, len(params)):
+                pairs = params[i].split("=") # name, "Texas"
+                # print(type(pairs[1]))
+
+                if pairs[1].isdigit():
+                    print(f"{pairs[1]}")
+                elif pairs[1].replace(".", "").isdigit():
+                    print(pairs[1])
+                elif pairs[1].replace("\"", ""):
+                    pass
+                    
+                    # print(pairs[1].replace("\"", ""))
+
+        # create State name="California" number_bathrooms=2 latitude=37.773972
+
+        # new_instance = HBNBCommand.classes[args]()
+        # storage.save()
+        # print(new_instance.id)
+        # storage.save()
 
     def help_create(self):
         """ Help information for the create method """
