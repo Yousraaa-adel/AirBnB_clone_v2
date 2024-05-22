@@ -141,22 +141,17 @@ class HBNBCommand(cmd.Cmd):
                 pairs = params[i].split("=")  # name, "Texas"
                 inner_string = pairs[1].replace('"', '')
                 inner_string= inner_string.replace("_", " ")
-                print(inner_string)
                 new_string = inner_string.split()
-                print(new_string[0])
 
                 if inner_string.isdigit():
                     new_dict[pairs[0]] = inner_string
-                    print("int")
                     
                 elif inner_string.replace(".", "").isdigit():
                     new_dict[pairs[0]] = inner_string
-                    print("float")
 
                 for  i in new_string : #[new, york]
                     if i.isalpha():
                         new_dict[pairs[0]] = inner_string
-                        print("str")
                 else:
                     pass
                 # create State name="New_Yo"rk" num="12312" flow=55.7
