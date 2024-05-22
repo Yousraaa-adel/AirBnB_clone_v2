@@ -1,50 +1,22 @@
 {
-    "State.a5ad391b-64c3-46fa-8ff1-cc0ae11f622e": {
-        "id": "a5ad391b-64c3-46fa-8ff1-cc0ae11f622e",
-        "created_at": "2024-05-22T21:30:23.621833",
-        "updated_at": "2024-05-22T21:30:23.621855",
+    "State.2b2612b7-61ae-431f-83d3-8ccfd0780478": {
+        "id": "2b2612b7-61ae-431f-83d3-8ccfd0780478",
+        "created_at": "2024-05-22T21:44:41.230117",
+        "updated_at": "2024-05-22T21:44:41.230136",
         "name": "\"California\"",
         "__class__": "State"
     },
-    "State.1978138e-13e4-4c63-86f9-aee9ba9befbc": {
-        "id": "1978138e-13e4-4c63-86f9-aee9ba9befbc",
-        "created_at": "2024-05-22T21:35:29.614921",
-        "updated_at": "2024-05-22T21:35:29.614943",
-        "name": "\"California\"",
-        "__class__": "State"
-    },
-    "State.7f83d44d-fad0-4ecf-a3bb-f879fa6967d0": {
-        "id": "7f83d44d-fad0-4ecf-a3bb-f879fa6967d0",
-        "created_at": "2024-05-22T21:37:52.747937",
-        "updated_at": "2024-05-22T21:37:52.747960",
-        "name": "\"Yoyo\"",
-        "__class__": "State"
-    },
-    "State.b45e69dc-9f13-4729-9284-8824e175274b": {
-        "id": "b45e69dc-9f13-4729-9284-8824e175274b",
-        "created_at": "2024-05-22T21:39:20.925123",
-        "updated_at": "2024-05-22T21:39:20.925134",
+    "State.0c34903e-34bb-4078-9c93-55bb8d21e886": {
+        "id": "0c34903e-34bb-4078-9c93-55bb8d21e886",
+        "created_at": "2024-05-22T21:44:41.231864",
+        "updated_at": "2024-05-22T21:44:41.231872",
         "name": "\"Arizona\"",
         "__class__": "State"
     },
-    "State.7cafafdc-eb60-405e-9777-034d849879ed": {
-        "id": "7cafafdc-eb60-405e-9777-034d849879ed",
-        "created_at": "2024-05-22T21:40:54.596437",
-        "updated_at": "2024-05-22T21:40:54.596454",
-        "name": "\"California\"",
-        "__class__": "State"
-    },
-    "State.928cf6f2-426c-4ed9-b161-d2de191a76e6": {
-        "id": "928cf6f2-426c-4ed9-b161-d2de191a76e6",
-        "created_at": "2024-05-22T21:40:54.598250",
-        "updated_at": "2024-05-22T21:40:54.598266",
-        "name": "\"Arizona\"",
-        "__class__": "State"
-    },
-    "Place.6a4e08d7-4f60-4c52-b030-a77e111809c6": {
-        "id": "6a4e08d7-4f60-4c52-b030-a77e111809c6",
-        "created_at": "2024-05-22T21:40:54.601858",
-        "updated_at": "2024-05-22T21:40:54.601868",
+    "Place.c978079b-f621-4445-bea0-3d72c2c6d939": {
+        "id": "c978079b-f621-4445-bea0-3d72c2c6d939",
+        "created_at": "2024-05-22T21:44:41.233026",
+        "updated_at": "2024-05-22T21:44:41.233039",
         "city_id": "\"0001\"",
         "user_id": "\"0001\"",
         "name": "\"My little house\"",
@@ -55,32 +27,22 @@
         "latitude": "37.773972",
         "__class__": "Place"
     },
-    "State.8abd50e8-0bcb-428e-8d14-5aeedcd7b197": {
-        "id": "8abd50e8-0bcb-428e-8d14-5aeedcd7b197",
-        "created_at": "2024-05-22T21:42:06.188497",
-        "updated_at": "2024-05-22T21:42:06.188515",
-        "name": "\"California\"",
+    "State.44e67cb9-5241-42ba-96ae-e2b75f914bf3": {
+        "id": "44e67cb9-5241-42ba-96ae-e2b75f914bf3",
+        "created_at": "2024-05-22T21:48:14.326784",
+        "updated_at": "2024-05-22T21:48:14.326808",
         "__class__": "State"
     },
-    "State.550be948-888c-4d73-93bd-a7571b2e17f2": {
-        "id": "550be948-888c-4d73-93bd-a7571b2e17f2",
-        "created_at": "2024-05-22T21:42:06.190770",
-        "updated_at": "2024-05-22T21:42:06.190779",
-        "name": "\"Arizona\"",
+    "State.01388378-78ed-4e76-a4ec-5d9bd965b933": {
+        "id": "01388378-78ed-4e76-a4ec-5d9bd965b933",
+        "created_at": "2024-05-22T21:48:18.473112",
+        "updated_at": "2024-05-22T21:48:18.473121",
         "__class__": "State"
     },
-    "Place.c19670da-c73e-48b5-8dbe-6426f3697b68": {
-        "id": "c19670da-c73e-48b5-8dbe-6426f3697b68",
-        "created_at": "2024-05-22T21:42:06.192827",
-        "updated_at": "2024-05-22T21:42:06.192838",
-        "city_id": "\"0001\"",
-        "user_id": "\"0001\"",
-        "name": "\"My little house\"",
-        "number_rooms": "4",
-        "number_bathrooms": "2",
-        "max_guest": "10",
-        "price_by_night": "300",
-        "latitude": "37.773972",
-        "__class__": "Place"
+    "State.affa88f6-2f2f-46d0-8b1e-f830bef982be": {
+        "id": "affa88f6-2f2f-46d0-8b1e-f830bef982be",
+        "created_at": "2024-05-22T21:48:20.768510",
+        "updated_at": "2024-05-22T21:48:20.768520",
+        "__class__": "State"
     }
 }
