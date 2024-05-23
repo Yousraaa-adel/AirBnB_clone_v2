@@ -62,12 +62,12 @@ class HBNBCommand(cmd.Cmd):
             _cls = pline[: pline.find(".")]
 
             # isolate and validate <command>
-            _cmd = pline[pline.find(".") + 1 : pline.find("(")]
+            _cmd = pline[pline.find(".") + 1: pline.find("(")]
             if _cmd not in HBNBCommand.dot_cmds:
                 raise Exception
 
             # if parantheses contain arguments, parse them
-            pline = pline[pline.find("(") + 1 : pline.find(")")]
+            pline = pline[pline.find("(") + 1: pline.find(")")]
             if pline:
                 # partition args: (<id>, [<delim>], [<*args>])
                 pline = pline.partition(", ")  # pline convert to tuple
@@ -140,7 +140,8 @@ class HBNBCommand(cmd.Cmd):
             for i in range(1, len(params)):
                 pairs = params[i].split("=")  # name, "Texas"
 
-                if pairs[1].startswith('"') and pairs[1].endswith('"'): # (email, 100, My home town is "\Texas\" and I love it)
+                # (email, 100, My home town is "\Texas\" and I love it)
+                if pairs[1].startswith('"') and pairs[1].endswith('"'):
                     pairs[1] = eval(pairs[1])
                     pairs[1] = pairs[1].replace("_", " ")
                     pairs[1] = pairs[1].replace('"', '\\"')
@@ -151,7 +152,8 @@ class HBNBCommand(cmd.Cmd):
                         pairs[1] = eval(pairs[1])
                         new_dict[pairs[0]] = pairs[1]
                     except (SyntaxError, NameError):
-                        pairs[1] = pairs[1].replace("_", " ").replace('"', '\\"')
+                        pairs[1] = pairs[1].replace("_", " ")
+                        pairs[1] = pairs[1].replace('"', '\\"')
                         print(type(pairs[1]))
 
             new_instance = HBNBCommand.classes[class_name]()  # b1 =BaseModel()
@@ -159,7 +161,6 @@ class HBNBCommand(cmd.Cmd):
                 setattr(new_instance, key, value)  # b1.name = "yassin"
             storage.save()
             print(new_instance.id)
-# create State name="New_York" num="12312" flow=55.7 email="yassin.waleed94@gmail.com" number_rooms=4 number_bathrooms=2
 
     def help_create(self):
         """Help information for the create method"""
@@ -310,7 +311,7 @@ class HBNBCommand(cmd.Cmd):
             if args and args[0] == '"':  # check for quoted arg
                 second_quote = args.find('"', 1)
                 att_name = args[1:second_quote]
-                args = args[second_quote + 1 :]
+                args = args[second_quote + 1:]
 
             args = args.partition(" ")
 
@@ -319,7 +320,7 @@ class HBNBCommand(cmd.Cmd):
                 att_name = args[0]
             # check for quoted val arg
             if args[2] and args[2][0] == '"':
-                att_val = args[2][1 : args[2].find('"', 1)]
+                att_val = args[2][1: args[2].find('"', 1)]
 
             # if att_val was not quoted arg
             if not att_val and args[2]:
