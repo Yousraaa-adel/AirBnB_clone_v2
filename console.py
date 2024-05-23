@@ -139,36 +139,27 @@ class HBNBCommand(cmd.Cmd):
         else:
             for i in range(1, len(params)):
                 pairs = params[i].split("=")  # name, "Texas"
-                pairs[1] = eval(pairs[1])
-                print(type(pairs[1]))
-                if type(pairs[1]) is str:
-                    pairs[1]= pairs[1].replace("_", " ").replace('"', '')
-                new_dict[pairs[0]] = pairs[1]
-                # inner_string = pairs[1].replace('"', '')
-                # inner_string= inner_string.replace("_", " ")#New york
-                # new_string = inner_string.split()#[new,york]
-                # print(new_string)
-# 84089a77-2efe-438e-bd33-70152c281768
-# yassin.waleed94@gmail.com
 
-                # if inner_string.isdigit():
-                #     new_dict[pairs[0]] = inner_string
-                    
-                # elif inner_string.replace(".", "").isdigit():
-                #     new_dict[pairs[0]] = inner_string
-            
-                # for  i in new_string : #[new, york]
-                #     if i.isalpha():
-                #         new_dict[pairs[0]] = inner_string
-                # else:
-                #     print(new_string)
-                #     new_dict[pairs[0]] = new_string
-# create State name="New_York" num="12312" flow=55.7 email="yassin.waleed94@gmail.com" state_id=84089a77-2efe-438e-bd33-70152c281768
-        new_instance = HBNBCommand.classes[class_name]()  # b1 =BaseModel()
-        for key, value in new_dict.items():
-            setattr(new_instance, key, value)  # b1.name = "yassin"
-        storage.save()
-        print(new_instance.id)
+                if pairs[1].startswith('"') and pairs[1].endswith('"'): # (email, 100, My home town is "\Texas\" and I love it)
+                    pairs[1] = eval(pairs[1])
+                    pairs[1] = pairs[1].replace("_", " ")
+                    pairs[1] = pairs[1].replace('"', '\\"')
+
+                    new_dict[pairs[0]] = pairs[1]
+                else:
+                    try:
+                        pairs[1] = eval(pairs[1])
+                        new_dict[pairs[0]] = pairs[1]
+                    except (SyntaxError, NameError):
+                        pairs[1] = pairs[1].replace("_", " ").replace('"', '\\"')
+                        print(type(pairs[1]))
+
+            new_instance = HBNBCommand.classes[class_name]()  # b1 =BaseModel()
+            for key, value in new_dict.items():
+                setattr(new_instance, key, value)  # b1.name = "yassin"
+            storage.save()
+            print(new_instance.id)
+# create State name="New_York" num="12312" flow=55.7 email="yassin.waleed94@gmail.com" number_rooms=4 number_bathrooms=2
 
     def help_create(self):
         """Help information for the create method"""
