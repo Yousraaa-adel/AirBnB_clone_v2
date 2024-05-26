@@ -12,21 +12,21 @@ Base = declarative_base()
 class BaseModel:
     """A base class for all hbnb models"""
     
-    # id = Column(String(60), primary_key=True, nullable=False)
-    # created_at = Column(DateTime, nullable=False, default=datetime.utcnow())
-    # updated_at = Column(DateTime, nullable=False, default=datetime.utcnow())
+    id = Column(String(60), primary_key=True, nullable=False)
+    created_at = Column(DateTime, nullable=False, default=datetime.utcnow())
+    updated_at = Column(DateTime, nullable=False, default=datetime.utcnow())
 
     def __init__(self, *args, **kwargs):
         """Instatntiates a new model"""
         if not kwargs:
             from models import storage
-            print("Initializing with default values")
+            # print("Initializing with default values")
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
             storage.new(self)
         else:
-            print("Initializing with provided values")
+            # print("Initializing with provided values")
             for key, value in kwargs.items():
                 if key == "__class__":
                     continue
@@ -65,15 +65,12 @@ class BaseModel:
         dictionary['created_at'] = self.created_at.isoformat()
         dictionary['updated_at'] = self.updated_at.isoformat()
 
-        print("Dictionary before removing _sa_instance_state:", dictionary)
-        dictionary.pop('_sa_instance_state', None)
-        print("Dictionary after removing _sa_instance_state:", dictionary)
-
-
+        if '_sa_instance_state' in dictionary.keys():
+                del dictionary['_sa_instance_state']
         return dictionary
 
     def delete(self):
         """ Deletes the current instance from the storage. """
         from models import storage
         # This method should be called on an instance.
-        print(storage)
+        storage.delete(self)
