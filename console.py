@@ -127,13 +127,13 @@ class HBNBCommand(cmd.Cmd):
     def do_create(self, args):
         """Create an object of any class"""
         params = args.split()
-        class_name = params[0]
+        # class_name = params[0]
         new_dict = {}
 
         if not args:
             print("** class name missing **")
             return
-        elif class_name not in HBNBCommand.classes:
+        elif params[0] not in HBNBCommand.classes:
             print("** class doesn't exist **")
             return
         else:
@@ -156,7 +156,7 @@ class HBNBCommand(cmd.Cmd):
                         pairs[1] = pairs[1].replace('"', '\\"')
                         print(type(pairs[1]))
 
-            new_instance = HBNBCommand.classes[class_name]()  # b1 =BaseModel()
+            new_instance = HBNBCommand.classes[params[0]]()  # b1 =BaseModel()
             for key, value in new_dict.items():
                 setattr(new_instance, key, value)  # b1.name = "yassin"
             storage.save()
