@@ -6,13 +6,11 @@ from sqlalchemy.orm import relationship
 from os import getenv
 
 
-
 metadata = Base.metadata
 place_amenity = Table("place_amenity",metadata ,
-                       Column('place_id', String(60), ForeignKey("places.id"),primary_key=True, nullable=False),
-                    Column('amenity_id', String(60), ForeignKey("amenities.id"),primary_key=True, nullable=False)
+    Column('place_id', String(60), ForeignKey("places.id"),primary_key=True, nullable=False),
+    Column('amenity_id', String(60), ForeignKey("amenities.id"),primary_key=True, nullable=False)
 )
-                      
 
 
 class Place(BaseModel, Base):
@@ -32,9 +30,17 @@ class Place(BaseModel, Base):
     amenities = relationship("Amenity", secondary="place_amenity", back_populates="place_amenities", overlaps="place_amenities")
     
     if getenv("HBNB_TYPE_STORAGE") == 'db':
-       
-       
-       
+       reviews = relationship(
+           "Review", cascade='all, delete, delete-orphan', backref="reviews"
+       )
+
     else:
         @property
-        
+        def reviews(self):
+            """ Getter for FileStorage Mode """
+            review_list = []
+            all_reviews = storage.all(Review)
+            for review in all_reviews.values():
+                if reviews.place_id  == self.id:
+                    review_list.append(review)
+            return review_list
