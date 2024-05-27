@@ -159,12 +159,12 @@ class HBNBCommand(cmd.Cmd):
                         pairs[1] = pairs[1].replace('"', '\\"')
                         print(type(pairs[1]))
 
-            new_instance = HBNBCommand.classes[params[0]]()  # b1 =BaseModel()
-            for key, value in new_dict.items():
-                setattr(new_instance, key, value)  # b1.name = "yassin"
-                # print(f"{key}, {value}")
+            new_instance = HBNBCommand.classes[params[0]](**new_dict)  # b1 =BaseModel()
+            # for key, value in new_dict.items():
+            #     setattr(new_instance, key, value)  # b1.name = "yassin"
+            storage.new(new_instance)
             storage.save()
-            # print(new_instance.__dict__)
+            # DBStorage.close()
             print(new_instance.id)
 
     def help_create(self):
