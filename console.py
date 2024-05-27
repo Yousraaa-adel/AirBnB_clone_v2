@@ -162,7 +162,9 @@ class HBNBCommand(cmd.Cmd):
             new_instance = HBNBCommand.classes[params[0]]()  # b1 =BaseModel()
             for key, value in new_dict.items():
                 setattr(new_instance, key, value)  # b1.name = "yassin"
+                # print(f"{key}, {value}")
             storage.save()
+            # print(new_instance.__dict__)
             print(new_instance.id)
 
     def help_create(self):
@@ -239,27 +241,24 @@ class HBNBCommand(cmd.Cmd):
     def do_all(self, args):
         """Shows all objects, or all objects of a class"""
         print_list = []
-        
-        if getenv("HBNB_TYPE_STORAGE") == 'FileStorage':
 
-            if args:
-                args = args.split(" ")[0]  # remove possible trailing args
-                if args not in HBNBCommand.classes:
-                    print("** class doesn't exist **")
-                    return
-                for k, v in storage._FileStorage__objects.items():
-                    if k.split(".")[0] == args:
-                        print_list.append(str(v))
-                print(print_list)
-            else:
-                for k, v in storage._FileStorage__objects.items():
-                    print_list.append(str(v))
-                print(print_list)
-                
+        if args:
+            args = args.split(" ")[0]  # remove possible trailing args
+            if args not in HBNBCommand.classes:
+                print("** class doesn't exist **")
+                return
+            print("Outside loop")
+            print(args)
+            print(HBNBCommand.classes[args])
+            for k, v in storage.all(HBNBCommand.classes[args]).items():
+                print("Loop accessed.")
+                # if k.split(".")[0] == args:
+                print_list.append(str(v))
         else:
-           x = DBStorage.all(args)
-           print(x)
-            
+            for k, v in storage.all().items():
+                print_list.append(str(v))
+
+        print(print_list)
             
 
     def help_all(self):

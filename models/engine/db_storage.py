@@ -36,12 +36,15 @@ class DBStorage():
         dic={}
         # if type(cls) is str:
         #     cls = eval(cls)
-        
         if cls is not None:
             queries = self.__session.query(cls)
+            print("Class exists")
+            print(queries)
             for instance in queries:
+                print("Inside the loop")
                 key = instance.__class__.__name__ + '.' + instance.id
                 dic[key] = instance
+
         else:
             classes = {
                     'User': User, 'Place': Place,
@@ -65,7 +68,7 @@ class DBStorage():
     def save(self):
         """commit all changes of the current database session"""
         self.__session.commit()
-        
+        # print(self.__session)
     def delete(self, obj=None):
         """delete from the current database session obj if not None"""
         if obj is not None:
