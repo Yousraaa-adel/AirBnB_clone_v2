@@ -11,31 +11,32 @@ from models.city import City
 from models.amenity import Amenity
 from models.review import Review
 
+
 class DBStorage():
     """DBStorage class"""
-    
+
     __engine = None
     __session = None
+
     def __init__(self):
         """Constructor of DBStorage"""
-        
+
         user = getenv("HBNB_MYSQL_USER")
         passwd = getenv("HBNB_MYSQL_PWD")
         db = getenv("HBNB_MYSQL_DB")
         host = getenv("HBNB_MYSQL_HOST")
         env = getenv("HBNB_ENV")
-        
+
         self.__engine = create_engine("mysql+mysqldb://{}:{}@{}/{}"
                                       .format(user, passwd, host, db),
                                       pool_pre_ping=True)
         if env == 'test':
             Base.metadata.drop_all(self.__engine)
 
-        
     def all(self, cls=None):
-        dic={}
-        # if type(cls) is str:
-        #     cls = eval(cls)
+        """ """
+        dic = {}
+
         if cls is not None:
             queries = self.__session.query(cls)
             print("Class exists")
@@ -51,37 +52,52 @@ class DBStorage():
                     'State': State, 'City': City, 'Amenity': Amenity,
                     'Review': Review
                   }
-            # if type(cls) is str:
-            #     cls = eval(cls)
-            
+
             for key, value in classes.items():
                 queries = self.__session.query(value)
                 for instance in queries:
                     key = instance.__class__.__name__ + '.' + instance.id
                     dic[key] = instance
         return dic
-                  
+
     def new(self, obj):
         """add the object to the current database session"""
-        self.__session.add(obj)
-            
+        try:
+            self.__session.add(obj)
+        except Exception as e:
+            print(f"Error saving changes: {e}")
+            raise
+
     def save(self):
         """commit all changes of the current database session"""
-        self.__session.commit()
-        # print(self.__session)
+        try:
+            self.__session.commit()
+            print("Changes saved successfully.")
+        except Exception as e:
+            print(f"Error saving changes: {e}")
+            raise
+
     def delete(self, obj=None):
         """delete from the current database session obj if not None"""
         if obj is not None:
             self.__session.delete(obj)
-            
+            self.save()
+
     def reload(self):
         """create all tables in the database"""
-        Base.metadata.create_all(self.__engine)
-        s1 = sessionmaker(bind=self.__engine, expire_on_commit=False)
-        Session= scoped_session(s1)
-        self.__session = Session()
+        try:
+            Base.metadata.create_all(self.__engine)
+            s1 = sessionmaker(bind=self.__engine, expire_on_commit=False)
+            Session = scoped_session(s1)
+            self.__session = Session()
+        except Exception as e:
+            print(f"Error reloading database: {e}")
+            raise
 
     def close(self):
-        """ calls remove()
-        """
-        self.__session.close()
+        """ calls remove() """
+        try:
+            self.__session.close()
+        except Exception as e:
+            print(f"Error closing session: {e}")
+            raise

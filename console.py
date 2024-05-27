@@ -15,7 +15,6 @@ from os import getenv
 from models.engine.db_storage import DBStorage
 
 
-
 class HBNBCommand(cmd.Cmd):
     """Contains the functionality for the HBNB console"""
 
@@ -159,7 +158,7 @@ class HBNBCommand(cmd.Cmd):
                         pairs[1] = pairs[1].replace('"', '\\"')
                         print(type(pairs[1]))
 
-            new_instance = HBNBCommand.classes[params[0]](**new_dict)  # b1 =BaseModel()
+            new_instance = HBNBCommand.classes[params[0]](**new_dict)
             # for key, value in new_dict.items():
             #     setattr(new_instance, key, value)  # b1.name = "yassin"
             storage.new(new_instance)
@@ -259,7 +258,6 @@ class HBNBCommand(cmd.Cmd):
                 print_list.append(str(v))
 
         print(print_list)
-            
 
     def help_all(self):
         """Help information for the all command"""
