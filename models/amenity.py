@@ -21,6 +21,5 @@ class Amenity(BaseModel, Base):
             "Place",
             secondary=place_amenity, back_populates="amenities")
 
-
     else:
         name = ""

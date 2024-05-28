@@ -10,9 +10,9 @@ from os import getenv
 storage_engine = getenv("HBNB_TYPE_STORAGE")
 
 if storage_engine == "db":
-
     metadata = Base.metadata
-    place_amenity = Table("place_amenity",metadata ,
+
+    place_amenity = Table("place_amenity", metadata,
         Column('place_id', String(60), ForeignKey("places.id"), primary_key=True, nullable=False),
         Column('amenity_id', String(60), ForeignKey("amenities.id"), primary_key=True, nullable=False)
     )
@@ -41,7 +41,6 @@ class Place(BaseModel, Base):
             )
 
     else:
-        import models
 
         city_id = ""
         user_id = ""
