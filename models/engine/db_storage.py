@@ -40,10 +40,10 @@ class DBStorage():
 
         if cls is not None:
             queries = self.__session.query(cls)
-            print("Class exists")
-            print(queries)
+            # print("Class exists")
+            # print(queries)
             for instance in queries:
-                print("Inside the loop")
+                # print("Inside the loop")
                 key = instance.__class__.__name__ + '.' + instance.id
                 dic[key] = instance
 
