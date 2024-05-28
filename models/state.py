@@ -5,26 +5,30 @@ from sqlalchemy import Column, Integer, String, DateTime, ForeignKey
 from sqlalchemy.orm import relationship
 from models.city import City
 from os import getenv
-from models import storage
+import models
+
+storage_engine = getenv("HBNB_TYPE_STORAGE")
 
 
 class State(BaseModel, Base):
-    """ State class """
-    __tablename__ = "states"
+    """ Representation of the State class. """
 
-    name = Column(String(128), nullable=False)
-    
-    if getenv("HBNB_TYPE_STORAGE") == 'db':
+    if storage_engine == 'db':
+        __tablename__ = "states"
+
+        name = Column(String(128), nullable=False)
         cities = relationship(
-            "City", cascade='all, delete, delete-orphan', backref="state"
-            )
+                "City", cascade='all, delete, delete-orphan', backref="state"
+                )
+
     else:
+        name = ""
+
         @property
         def cities(self):
             """ Getter for FileStorage Mode """
-            city_list = []
-            all_cities = storage.all(City)
-            for city in all_cities.values():
+            result = []
+            for city in models.storage.all(City).values():
                 if city.state_id == self.id:
-                    city_list.append(city)
-            return city_list
+                    result.append(city)
+            return result

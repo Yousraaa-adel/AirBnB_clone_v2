@@ -3,14 +3,8 @@
 from os import getenv
 from sqlalchemy import create_engine, Column, Integer, String
 from sqlalchemy.orm import sessionmaker, scoped_session
-from models.base_model import Base, BaseModel
-from models.user import User
-from models.place import Place
-from models.state import State
-from models.city import City
-from models.amenity import Amenity
-from models.review import Review
-
+from models.base_model import Base
+import models
 
 class DBStorage():
     """DBStorage class"""
@@ -28,14 +22,21 @@ class DBStorage():
         env = getenv("HBNB_ENV")
 
         self.__engine = create_engine("mysql+mysqldb://{}:{}@{}/{}"
-                                      .format(user, passwd, host, db),
-                                      pool_pre_ping=True)
+            .format(user, passwd, host, db),
+            pool_pre_ping=True)
         if env == 'test':
             Base.metadata.drop_all(self.__engine)
 
     def all(self, cls=None):
         """ """
+        # from models.city import City
+        # from models.review import Review
+        # from models.state import State
+        # from models.user import User
+        # from models.amenity import Amenity
+        # from models.place import Place
         dic = {}
+        
 
         if cls is not None:
             queries = self.__session.query(cls)
@@ -47,13 +48,7 @@ class DBStorage():
                 dic[key] = instance
 
         else:
-            classes = {
-                    'User': User, 'Place': Place,
-                    'State': State, 'City': City, 'Amenity': Amenity,
-                    'Review': Review
-                  }
-
-            for key, value in classes.items():
+            for key, value in models.the_tables.items():
                 queries = self.__session.query(value)
                 for instance in queries:
                     key = instance.__class__.__name__ + '.' + instance.id

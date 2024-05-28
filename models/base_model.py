@@ -5,12 +5,17 @@ from uuid import uuid4
 from datetime import datetime
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String, DateTime
+from os import getenv
+
+storage_engine = getenv("HBNB_TYPE_STORAGE")
+
+if storage_engine == "db":
+    Base = declarative_base()
+else:
+    Base = object
 
 
-Base = declarative_base()
-
-
-class BaseModel:
+class BaseModel():
     """A base class for all hbnb models"""
 
     id = Column(String(60), primary_key=True, nullable=False)
@@ -62,7 +67,7 @@ class BaseModel:
         dictionary = {}
         dictionary.update(self.__dict__)
         dictionary.update({'__class__':
-                          (str(type(self)).split('.')[-1]).split('\'')[0]})
+                        (str(type(self)).split('.')[-1]).split('\'')[0]})
         dictionary['created_at'] = self.created_at.isoformat()
         dictionary['updated_at'] = self.updated_at.isoformat()
 
