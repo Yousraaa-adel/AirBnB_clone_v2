@@ -13,16 +13,16 @@ app = Flask(__name__)
 
 
 @app.route("/", strict_slashes=False)
-def hello_world():
+def index():
     return "Hello HBNB!"
 
 
 @app.route("/hbnb", strict_slashes=False)
-def hello():
+def hbnb():
     return "HBNB"
 
 
-app.route("/c/<text>", strict_slashes=False)
+@app.route("/c/<text>", strict_slashes=False)
 def cisfun(text):
     return "C " + text.replace('_', ' ')
 
