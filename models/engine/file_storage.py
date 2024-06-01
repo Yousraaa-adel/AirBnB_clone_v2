@@ -72,3 +72,7 @@ class FileStorage:
         else:
             # print("There is no object to delete.")
             return
+
+    def close(self):
+        """ """
+        self.reload()

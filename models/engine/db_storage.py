@@ -89,7 +89,7 @@ class DBStorage():
             print(f"Error reloading database: {e}")
             raise
 
-    def close(self):
+    def close_session(self):
         """ calls remove() """
         try:
             self.__session.close()
