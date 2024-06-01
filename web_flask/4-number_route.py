@@ -35,7 +35,11 @@ def pythoniscool(text):
 
 @app.route("/number/<n>", strict_slashes=False)
 def isnum(n):
-    return "{:d} is a number".format(n)
+    try:
+        if n.isdigit():
+            return f"{n} is a number"
+    except ValueError:
+        return "404 Not Found", 404
 
 
 if __name__ == "__main__":
