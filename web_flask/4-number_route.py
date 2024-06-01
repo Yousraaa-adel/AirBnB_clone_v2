@@ -35,8 +35,7 @@ def pythoniscool(text):
 
 @app.route("/number/<n>", strict_slashes=False)
 def isnum(n):
-    if n.isdigit():
-        return f"{n} is a number"
+    return "{:d} is a number".format(n)
 
 
 if __name__ == "__main__":
