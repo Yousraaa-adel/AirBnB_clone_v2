@@ -15,11 +15,21 @@ from operator import attrgetter
 app = Flask(__name__)
 
 
-@app.route("/states_list", strict_slashes=False)
-def list_cities():
+@app.route("/states", strict_slashes=False)
+def states():
     return render_template(
         "7-states_list.html",
         states=storage.all(State)
+    )
+
+
+@app.route("/states/<id>", strict_slashes=False)
+def cities(id=None):
+    return render_template(
+        "9-states.html",
+        states=storage.all(State).get(
+            "State.{}".format(id)
+        )
     )
 
 
